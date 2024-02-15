@@ -1,0 +1,13 @@
+Cave Tools Minetest Mod
+
+
+License of source code
+----------------------
+
+The MIT License (MIT)
+
+
+License of media (textures)
+---------------------------
+
+Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)

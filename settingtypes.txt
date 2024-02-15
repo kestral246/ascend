@@ -1,0 +1,14 @@
+# Settings for ascend that can be changed in minetest.conf
+
+# Define how high ceiling can be.
+# (default = 30)
+ascend_ceiling_height (Ascend ceiling height) int 30 10 100
+
+# Define how thick ceiling can be.
+# (default = 90)
+ascend_ceiling_thickness (Ascend ceiling thickness) int 90 10 300
+
+# Define whether ascend can go thru trees and bushes.
+# true = allow thru trees, false = disallow thru trees.
+# (default = false) 
+ascend_thru_trees (Ascend thru tree nodes) bool false
