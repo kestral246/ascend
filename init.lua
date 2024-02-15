@@ -31,10 +31,8 @@ minetest.register_chatcommand("ascend", {
 
 		-- normal surface = ?.5 +/-, nodes at integer values.
 		pos.y = math.floor(pos.y + 0.5)
-		--minetest.debug("y = "..pos.y)
 
 		local nodename = minetest.get_node(pos).name
-		--minetest.debug("node = "..nodename)
 		local blocked = false
 		local up = 1
 
@@ -91,7 +89,6 @@ minetest.register_chatcommand("ascend", {
 			while up2 <= thickness do
 				local newpos = vector.add(pos,{x=0,y=up+up2,z=0})
 				local node = minetest.get_node_or_nil(newpos)
-				--local nodename = nil
 				local walkable = nil
 				if node ~= nil then
 					nodename = node.name
@@ -171,8 +168,6 @@ minetest.register_chatcommand("ascend", {
 				minetest.chat_send_player(name, "Can't ascend—ceiling thickness exceeds "..thickness)
 			elseif blocked == true then
 				--Chat command happens earlier, do nothing and end. 
-			--elseif water_surface == true then
-				--player:set_pos(vector.add(pos, {x=0,y=up+up2-1.5,z=0}))
 			else
 				--Current node OK, determine offset based on block type.
 				local offset = nil
