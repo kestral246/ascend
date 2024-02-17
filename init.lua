@@ -2,7 +2,7 @@
 -- Ascend by chat command, if possible.
 -- By David_G (kestral246@gmail.com)
 
--- 2024-02-16
+-- 2024-02-17
 
 -- Use chat command "/ascend" to use.
 -- • If can't reach valid destination, will return error message.
@@ -36,9 +36,13 @@ minetest.register_chatcommand("ascend", {
 		local blocked = false
 		local up = 1
 
-		-- Check ground node
-		if minetest.get_item_group(nodename, "water") > 0 then
-			-- Can't ascend from water.
+		if player:get_attach() ~= nil then
+			-- Check if player attached to entity.
+			minetest.chat_send_player(name, "Can't ascend while attached to an object")
+			blocked = true
+
+		elseif minetest.get_item_group(nodename, "water") > 0 then
+			-- Check ground node for water.
 			minetest.chat_send_player(name, "Can't ascend from water")
 			blocked = true
 
