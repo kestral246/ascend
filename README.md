@@ -16,6 +16,7 @@ Useful for quickly getting out of caves, but be careful you don't get stuck in a
 - *Can't* ascend while in water.
 - However, one *can* ascend to the surface of water, if there's an air node above.
 - *Can* ascend through lava, *but not* onto the lava's surface.
+- *Can't* ascend through doors or gates.
 - Optionally can ascend through trees and bushes, but defaults to not allowed.
 - If the scan up reaches unloaded nodes, it will attempt to load them. It's then necessary to reissue the /ascend command, which *may* or *may not* complete.
 - Requires "ascend" privilege to use. (Granted automatically in singleplayer. In multiplayer use: */grant &lt;player&gt; ascend.*)

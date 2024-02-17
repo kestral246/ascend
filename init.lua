@@ -2,7 +2,7 @@
 -- Ascend by chat command, if possible.
 -- By David_G (kestral246@gmail.com)
 
--- 2024-02-15
+-- 2024-02-16
 
 -- Use chat command "/ascend" to use.
 -- • If can't reach valid destination, will return error message.
@@ -126,6 +126,13 @@ minetest.register_chatcommand("ascend", {
 						blocked = true
 						break
 					end
+
+				elseif minetest.get_item_group(nodename, "door") > 0 or
+						string.find(nodename, "gate_") ~= nil then
+					--block on doors and gates
+					minetest.chat_send_player(name, "Can't ascend thru doors or gates")
+					blocked = true
+					break
 
 				elseif walkable then
 					--normal node
