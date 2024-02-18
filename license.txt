@@ -1,7 +1,0 @@
-Ascend Minetest Mod
-
-
-License of source code
-----------------------
-
-The MIT License (MIT)
