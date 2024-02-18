@@ -42,7 +42,3 @@ Licenses
 Source code
 
 > The MIT License (MIT)
-
-Media (textures)
-
-> Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
