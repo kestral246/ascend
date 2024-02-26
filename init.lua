@@ -2,7 +2,7 @@
 -- Ascend by chat command, if possible.
 -- By David_G (kestral246@gmail.com)
 
--- 2024-02-25
+-- 2024-02-26
 
 -- Now supports Minetest Game and MineClone2.
 
@@ -42,18 +42,18 @@ minetest.register_chatcommand("ascend", {
 		local blocked = false
 		local up = 1
 
+		-- Check if player attached to entity.
 		if player:get_attach() ~= nil then
-			-- Check if player attached to entity.
 			minetest.chat_send_player(name, "Can't ascend while attached to an object")
 			blocked = true
 
+		-- Check ground node for water.
 		elseif minetest.get_item_group(nodename, "water") > 0 then
-			-- Check ground node for water.
 			minetest.chat_send_player(name, "Can't ascend from water")
 			blocked = true
 
+		--Check ground node for lava.
 		elseif minetest.get_item_group(nodename, "lava") > 0 then
-			--Check ground node for lava.
 			minetest.chat_send_player(name, "Can't ascend from lava")
 			blocked = true
 
@@ -67,18 +67,18 @@ minetest.register_chatcommand("ascend", {
 					nodename = node.name
 				end
 
+				-- Area not loaded.
 				if node == nil then
-					-- Area not loaded.
 					local remaining = height + thickness - up
 					minetest.load_area(newpos, vector.add(newpos,{x=0,y=remaining,z=0}))
 					minetest.chat_send_player(name, "Can't ascend—area not loaded…try again")
 					blocked = true
 					break
 
+				-- Reached ceiling node. (Ladders can block water and lava.)
 				elseif minetest.registered_nodes[nodename].walkable == true or
 						minetest.get_item_group(nodename, "water") > 0 or
 						minetest.get_item_group(nodename, "lava") > 0 then
-					-- Reached ceiling node. (Ladders can block water and lava.)
 					-- up remains pointing to ceiling node.
 					break
 
@@ -92,8 +92,8 @@ minetest.register_chatcommand("ascend", {
 		if blocked == true then
 			--Chat command happens earlier, do nothing and end.
 
+		--Reached ceiling. (up pointing to ceiling node)
 		elseif up <= height then
-			--Reached ceiling. (up pointing to ceiling node)
 			local up2 = 0
 			local water_surface = false
 			local snow_height = nil
@@ -195,15 +195,15 @@ minetest.register_chatcommand("ascend", {
 					blocked = true
 					break
 
-				-- Normal node.
+				-- All the rest of the normal, walkable nodes.
 				elseif walkable then
 					last_nodename = nodename
 					surface_node = node
 					up2 = up2 + 1
 
-				-- Found the first node above ground.
-				elseif nodename == "air" or nodename == "ignore" or
-						walkable == false then
+				-- Found the first node above ground, only non-walkable nodes are left.
+				else
+					-- Examine surface node for special processing.
 					if last_nodename == "lava" then
 						-- Can't land on lava.
 						minetest.chat_send_player(name, "Can't ascend onto lava")
@@ -237,14 +237,9 @@ minetest.register_chatcommand("ascend", {
 						end
 						break
 					else
-						-- walkable
+						-- Normal walkable node.
 						break
 					end
-
-				-- Shouldn't get here.
-				else
-					minetest.debug("Ascend: unrecognized node!")
-					break
 				end
 			end --while
 
@@ -301,10 +296,13 @@ minetest.register_chatcommand("ascend", {
 					minetest.chat_send_player(name, "Can't ascend—not enough room")
 				end
 
-				-- Move player up, applying offset, and display how many nodes up.
+				-- Ascent valid.
 				if offset ~= nil then
+					-- Move player up, applying offset.
 					local pos_final = vector.add(pos, {x=0,y=up+up2+offset,z=0})
 					player:set_pos(pos_final)
+
+					-- Calculate and display distance traveled, including fractional nodes.
 					local pos_final_y = math.floor(16*pos_final.y + 0.5)/16
 					local height = pos_final_y - pos_init_y
 					local iheight = math.floor(height)
