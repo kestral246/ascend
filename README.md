@@ -12,8 +12,10 @@ Use the chat command: **/ascend** to instantly ascend vertically through rocks a
 
 Useful for quickly getting out of caves, but be careful you don't get stuck in a very high spot. There's no way to preview the destination ahead of time, so make sure you're prepared.
 
+- **New:** Improved handling of unloaded regions—nonexistent ones will now be generated.  With this I've extended the maximum allowed thickness to 1000 nodes. However, caution is advised when using very large values, since there still might be some corner cases that aren't handled well.
+
 - Maximum ceiling height defaults to 30 nodes, but can be configured from 10 to 100 nodes.
-- Maximum thickness of ceiling that can be traversed defaults to 90 nodes, but can be configured from 10 to 300 nodes.
+- Maximum thickness of ceiling that can be traversed defaults to 90 nodes, but can be configured from 10 to 1000 nodes.
 - *Can't* ascend if not enough room to stand at destination.
 - *Can't* ascend while in water or lava.
 - However, one *can* ascend to the surface of water, if there's an air node above.
@@ -30,7 +32,7 @@ Configuration
 -------------
 
 - ascend_ceiling_height: default = 30, but ranges from 10 to 100 nodes.
-- ascend_ceiling_thickness: default = 90, but ranges from 10 to 300 nodes.
+- ascend_ceiling_thickness: default = 90, but ranges from 10 to 1000 nodes.
 - ascend_thru_trees: default = false.
 
 

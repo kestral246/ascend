@@ -6,7 +6,7 @@ ascend_ceiling_height (Ascend ceiling height) int 30 10 100
 
 # Define how thick ceiling can be.
 # (default = 90)
-ascend_ceiling_thickness (Ascend ceiling thickness) int 90 10 300
+ascend_ceiling_thickness (Ascend ceiling thickness) int 90 10 1000
 
 # Define whether ascend can go thru trees and bushes.
 # true = allow thru trees, false = disallow thru trees.

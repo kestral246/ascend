@@ -2,7 +2,7 @@
 -- Ascend by chat command, if possible.
 -- By David_G (kestral246@gmail.com)
 
--- 2024-02-26
+-- 2024-03-20
 
 -- Now supports Minetest Game and MineClone2.
 
@@ -110,10 +110,10 @@ minetest.register_chatcommand("ascend", {
 					walkable = minetest.registered_nodes[nodename].walkable
 				end
 
-				-- Area not loaded.
-				if node == nil then
+				-- Area not loaded. Now also force mapgen if needed.
+				if node == nil or nodename == "ignore" then
 					local remaining = height + thickness - (up + up2)
-					minetest.load_area(newpos, vector.add(newpos,{x=0,y=remaining,z=0}))
+					minetest.emerge_area(newpos, vector.add(newpos,{x=0,y=remaining,z=0}))
 					minetest.chat_send_player(name, "Can't ascend—area not loaded (try again)")
 					blocked = true
 					break
