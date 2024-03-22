@@ -2,7 +2,7 @@
 -- Ascend by chat command, if possible.
 -- By David_G (kestral246@gmail.com)
 
--- 2024-03-20
+-- 2024-03-21
 
 -- Now supports Minetest Game and MineClone2.
 
@@ -75,6 +75,12 @@ minetest.register_chatcommand("ascend", {
 					blocked = true
 					break
 
+				-- Unknown node.
+				elseif minetest.registered_nodes[nodename] == nil then
+					minetest.chat_send_player(name, "Can't ascend thru unknown node")
+					blocked = true
+					break
+
 				-- Reached ceiling node. (Ladders can block water and lava.)
 				elseif minetest.registered_nodes[nodename].walkable == true or
 						minetest.get_item_group(nodename, "water") > 0 or
@@ -105,9 +111,14 @@ minetest.register_chatcommand("ascend", {
 				local newpos = vector.add(pos,{x=0,y=up+up2,z=0})
 				local node = minetest.get_node_or_nil(newpos)
 				local walkable = nil
+
+				-- Define some aliases.
 				if node ~= nil then
 					nodename = node.name
-					walkable = minetest.registered_nodes[nodename].walkable
+					-- Check that node isn't unknown.
+					if minetest.registered_nodes[nodename] ~= nil then
+						walkable = minetest.registered_nodes[nodename].walkable
+					end
 				end
 
 				-- Area not loaded. Now also force mapgen if needed.
@@ -115,6 +126,12 @@ minetest.register_chatcommand("ascend", {
 					local remaining = height + thickness - (up + up2)
 					minetest.emerge_area(newpos, vector.add(newpos,{x=0,y=remaining,z=0}))
 					minetest.chat_send_player(name, "Can't ascend—area not loaded (try again)")
+					blocked = true
+					break
+
+				-- Actual check whether node is unknown.
+				elseif minetest.registered_nodes[nodename] == nil then
+					minetest.chat_send_player(name, "Can't ascend thru unknown nodes")
 					blocked = true
 					break
 
