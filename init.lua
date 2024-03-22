@@ -195,6 +195,12 @@ minetest.register_chatcommand("ascend", {
 					blocked = true
 					break
 
+				-- Block on bedrock.
+				elseif (nodename == "mcl_core:bedrock") then
+					minetest.chat_send_player(name, "Can't ascend thru bedrock")
+					blocked = true
+					break
+
 				-- All the rest of the normal, walkable nodes.
 				elseif walkable then
 					last_nodename = nodename
