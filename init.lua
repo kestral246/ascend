@@ -159,8 +159,9 @@ minetest.register_chatcommand("ascend", {
 						minetest.get_item_group(nodename, "bee_nest") > 0 or
 						minetest.get_item_group(nodename, "cocoa") > 0 then
 					if ascend_trees == true then
-						--tree node normal
+						--tree node normal, will need to test surface
 						last_node = nodename
+						surface_node = node
 						up2 = up2 + 1
 					else
 						minetest.chat_send_player(name, "Can't ascend thru trees or other large vegetation")
