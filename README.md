@@ -6,12 +6,13 @@ By David G (kestral246@gmail.com)
 
 ![Ascend](screenshot.png "Ascend")
 
-**New: Now supports Minetest Game and MineClone2.**
+**Supports Minetest Game and MineClone2.**
 
 Use the chat command: **/ascend** to instantly ascend vertically through rocks and other solid nodes.
 
 Useful for quickly getting out of caves, but be careful you don't get stuck in a very high spot. There's no way to preview the destination ahead of time, so make sure you're prepared.
 
+- **New:** Can now use either **/ascend** or **/asc** to ascend.
 - **New:** Improved handling of unloaded regions—nonexistent ones will now be generated.  With this I've extended the maximum allowed thickness to 1000 nodes. However, caution is advised when using very large values, since there still might be some corner cases that aren't handled well.
 
 - Maximum ceiling height defaults to 30 nodes, but can be configured from 10 to 100 nodes.
